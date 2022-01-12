@@ -1,0 +1,26 @@
+CREATE TABLE public.serial_number (
+	id serial4 NOT NULL,
+	sn int4 NOT NULL,
+	name_c varchar NULL
+);
+
+CREATE OR REPLACE PROCEDURE public.insert_sn(snn integer, namec character varying)
+ LANGUAGE plpgsql
+AS $procedure$
+	BEGIN
+		insert into serial_number (sn, name_c)
+	    values(snn, namec);
+	END;
+$procedure$
+;
+
+CREATE OR REPLACE FUNCTION public.select_sn(_name character varying)
+ RETURNS SETOF serial_number
+ LANGUAGE sql
+AS $function$
+    SELECT * 
+    FROM serial_number 
+    WHERE name_c like ('%' || _name || '%') 
+    ORDER BY id;
+$function$
+;
