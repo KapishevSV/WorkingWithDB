@@ -20,4 +20,16 @@
     <#else>
         Not found
     </#list>
+    <br>
+    <div>Добавление новой записи</div>
+    <br>
+    <div>
+        <form method="post">
+            <input type="text" name="text" placeholder="SN"/>
+            <br><br>
+            <input type="text" name="tag" placeholder="Name"/>
+            <br><br>
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
 </@c.page>
