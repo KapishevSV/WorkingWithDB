@@ -3,9 +3,9 @@
 <@c.page>
     <div>Поиск счетчика</div><br>
         <form method="get" action="search_count">
-            Номер: <input type="text" name="sn" value=${sn}>
+            Номер: <input type="text" name="sn" value=${sn!""}>
             <br><br>
-            Имя: <input type="text" name="name" value=${name}>
+            Имя: <input type="text" name="name" value=${name!""}>
             <br><br>
             <button type="submit">Найти</button>
         </form>
@@ -25,9 +25,9 @@
     <br>
     <div>
         <form method="post">
-            <input type="text" name="text" placeholder="SN"/>
+            Номер: <input type="text" name="addSn"/>
             <br><br>
-            <input type="text" name="tag" placeholder="Name"/>
+            Имя: <input type="text" name="addName"/>
             <br><br>
             <button type="submit">Добавить</button>
         </form>

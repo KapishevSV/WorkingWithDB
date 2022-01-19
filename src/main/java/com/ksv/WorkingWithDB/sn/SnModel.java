@@ -1,14 +1,12 @@
 package com.ksv.WorkingWithDB.sn;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name="serial_number")
 public class SnModel {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private Integer sn;
     @Column(name = "name_c")
@@ -17,12 +15,29 @@ public class SnModel {
     public SnModel() {
     }
 
+    public SnModel(Integer sn, String name){
+        this.sn = sn;
+        this.name = name;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
 
+    public void setSn(Integer sn) {
+        this.sn = sn;
+    }
+
     public Integer getSn() {
         return sn;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {

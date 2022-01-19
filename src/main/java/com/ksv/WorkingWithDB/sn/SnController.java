@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Map;
 
 @Controller
 public class SnController {
@@ -62,6 +65,19 @@ public class SnController {
         model.addAttribute("snModels", snModels);
         model.addAttribute("name", name);
         model.addAttribute("sn", sn);
+
+        return "search_count";
+    }
+
+    @PostMapping("search_count")
+    public String add(
+            @RequestParam String addSn,
+            @RequestParam String addName,
+            Map<String, Object> model){
+        SnModel snModel = new SnModel(Integer.valueOf(addSn), addName);
+        snRepo.save(snModel);
+        Iterable<SnModel> snModels = snRepo.findAll();
+        model.put("snModels", snModels);
 
         return "search_count";
     }
