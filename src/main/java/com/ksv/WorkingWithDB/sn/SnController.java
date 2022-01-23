@@ -74,8 +74,11 @@ public class SnController {
             @RequestParam String addSn,
             @RequestParam String addName,
             Map<String, Object> model){
-        SnModel snModel = new SnModel(Integer.valueOf(addSn), addName);
-        snRepo.save(snModel);
+        //SnModel snModel = new SnModel(Integer.valueOf(addSn), addName);
+        //snRepo.save(snModel);
+        snRepo.insertNewCounter(Integer.valueOf(addSn), addName);
+
+
         Iterable<SnModel> snModels = snRepo.findAll();
         model.put("snModels", snModels);
 

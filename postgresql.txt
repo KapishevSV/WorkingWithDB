@@ -14,7 +14,7 @@ CREATE OR REPLACE PROCEDURE public.insert_sn(snn integer, namec character varyin
  LANGUAGE plpgsql
 AS $procedure$
 	BEGIN
-		insert into serial_number (sn, name_c)
+		insert into serial_number_old (sn, name_c)
 	    values(snn, namec);
 	END;
 $procedure$
