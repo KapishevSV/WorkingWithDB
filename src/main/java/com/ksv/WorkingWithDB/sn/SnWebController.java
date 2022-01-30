@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class SnController {
+public class SnWebController {
     @Autowired
-    private SnRepo snRepo;
+    private final SnService snService;
 
-    public SnController(SnRepo snRepo) {
-        this.snRepo = snRepo;
+    public SnWebController(SnService snService) {
+        this.snService = snService;
     }
 
     @GetMapping("main_")
@@ -23,9 +23,9 @@ public class SnController {
         Iterable<SnModel> snModels;
 
         if(name != null && !name.isEmpty()){
-            snModels = snRepo.findByName(name);
+            snModels = snService.findByName(name);
         } else {
-            snModels = snRepo.findAll();
+            snModels = snService.findAll();
         }
 
         model.addAttribute("snModels", snModels);
@@ -39,9 +39,9 @@ public class SnController {
         Iterable<SnModel> snModels;
 
         if(sn != null && !sn.isEmpty()){
-            snModels = snRepo.findBySn(Integer.valueOf(sn));
+            snModels = snService.findBySn(Integer.valueOf(sn));
         } else {
-            snModels = snRepo.findAll();
+            snModels = snService.findAll();
         }
 
         model.addAttribute("snModels", snModels);
@@ -57,9 +57,9 @@ public class SnController {
         Iterable<SnModel> snModels;
 
         try {
-            snModels = snRepo.findByNameAndSn(name, Integer.valueOf(sn));
+            snModels = snService.findByNameAndSn(name, Integer.valueOf(sn));
         } catch(NumberFormatException e){
-            snModels = snRepo.findByNameContaining(name);
+            snModels = snService.findByNameContaining(name);
         }
 
         model.addAttribute("snModels", snModels);
@@ -76,10 +76,9 @@ public class SnController {
             Map<String, Object> model){
         //SnModel snModel = new SnModel(Integer.valueOf(addSn), addName);
         //snRepo.save(snModel);
-        snRepo.insertNewCounter(Integer.valueOf(addSn), addName);
+        snService.insertNewCounter(Integer.valueOf(addSn), addName);
 
-
-        Iterable<SnModel> snModels = snRepo.findAll();
+        Iterable<SnModel> snModels = snService.findAll();
         model.put("snModels", snModels);
 
         return "search_count";

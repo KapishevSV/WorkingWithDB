@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table (name="serial_number_old")
 public class SnModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer sn;
     @Column(name = "name_c")

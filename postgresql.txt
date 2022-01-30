@@ -10,6 +10,12 @@ CREATE TABLE public.serial_number (
 	name_c varchar NULL
 );
 
+CREATE TABLE public.serial_number_old (
+	id int4 NOT NULL DEFAULT nextval('serial_number_id_seq'::regclass),
+	sn int4 NOT NULL,
+	name_c varchar NULL
+);
+
 CREATE OR REPLACE PROCEDURE public.insert_sn(snn integer, namec character varying)
  LANGUAGE plpgsql
 AS $procedure$
