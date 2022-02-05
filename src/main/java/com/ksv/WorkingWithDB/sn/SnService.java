@@ -13,7 +13,11 @@ public interface SnService {
 
     List<SnModel> findByNameContaining(String name);
 
+    void create(SnModel snModel);
+
     void insertNewCounter(Integer sn, String namec);
+
+    boolean update(SnModel snModel, int id);
 
     boolean delete(int id);
 }

@@ -3,10 +3,7 @@ package com.ksv.WorkingWithDB.sn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,14 +15,31 @@ public class SnRestController {
     public SnRestController(SnService snService) {
         this.snService = snService;
     }
-
-    @GetMapping(value = "sn")
+    //чтение всех записей
+    @GetMapping(value = "snAll")
     public ResponseEntity<List<SnModel>> read(){
         final List<SnModel> sn = snService.findAll();
 
         return sn != null && !sn.isEmpty()
                 ? new ResponseEntity<>(sn, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    //чтение одной записи по части имени, формат: ?name=name
+    @RequestMapping(value = "snName", method = RequestMethod.GET)
+    public ResponseEntity<List<SnModel>> searchByPartOfName(@RequestParam(name = "name", required = false) String name){
+        final List<SnModel> sn = snService.findByNameContaining(name);
+
+        return sn != null && !sn.isEmpty()
+                ? new ResponseEntity<>(sn, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+    //добавление новой записи
+    @PostMapping(value = "/sn")
+    public ResponseEntity<?> insert(@RequestBody SnModel snModel){
+        snService.create(snModel);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/sn/{id}")

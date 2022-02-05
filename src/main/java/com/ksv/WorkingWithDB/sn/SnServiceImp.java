@@ -38,16 +38,32 @@ public class SnServiceImp implements SnService {
     }
 
     @Override
+    public void create(SnModel snModel) {
+        snRepo.save(snModel);
+    }
+
+    @Override
     public void insertNewCounter(Integer sn, String namec) {
         snRepo.insertNewCounter(sn, namec);
     }
 
     @Override
+    public boolean update(SnModel snModel, int id) {
+        if (snRepo.existsById(id)) {
+            snModel.setId(id);
+            snRepo.save(snModel);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean delete(int id) {
-        if(snRepo.existsById(id)){
+        if (snRepo.existsById(id)) {
             snRepo.deleteById(id);
             return true;
         }
         return false;
     }
 }
+
