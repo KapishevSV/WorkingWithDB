@@ -3,7 +3,7 @@ package com.ksv.WorkingWithDB.sn;
 import javax.persistence.*;
 
 @Entity
-@Table (name="serial_number_old")
+@Table (name="count")
 public class SnModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
