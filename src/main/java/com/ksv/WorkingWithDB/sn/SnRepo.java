@@ -26,8 +26,7 @@ public interface SnRepo extends CrudRepository<SnModel, Integer> {
     @Modifying
     @Transactional
     @Query(value = "CALL insert_sn(:sn, :namec);", nativeQuery = true)
-    void insertNewCounter(@Param("sn") Integer sn,
-                                   @Param("namec") String namec);
+    void insertNewCounter(@Param("sn") Integer sn, @Param("namec") String namec);
 
 //    @Query(value = "select select_sn(:name)")
 //    List<SnModel> findSn(String name);
