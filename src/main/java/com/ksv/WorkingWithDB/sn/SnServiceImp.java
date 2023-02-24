@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SnServiceImp implements SnService {
+public class  SnServiceImp implements SnService {
     private final SnRepo snRepo;
 
     public SnServiceImp(SnRepo snRepo) {

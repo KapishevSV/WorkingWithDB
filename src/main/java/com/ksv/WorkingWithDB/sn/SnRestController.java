@@ -38,7 +38,8 @@ public class SnRestController {
     //добавление новой записи
     @PostMapping(value = "/sn")
     public ResponseEntity<?> insert(@RequestBody SnModel snModel){
-        snService.create(snModel);
+        snService.insertNewCounter(snModel.getSn(), snModel.getName());
+        //snService.create(snModel);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

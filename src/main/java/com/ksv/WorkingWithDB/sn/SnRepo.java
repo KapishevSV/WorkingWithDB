@@ -4,13 +4,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.NonNullApi;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
-public interface SnRepo extends CrudRepository<SnModel, Integer> {
+public interface  SnRepo extends CrudRepository<SnModel, Integer> {
     List<SnModel> findByName(String name);
+
+    SnModel save(SnModel snModel);
 
 //    @Procedure(value = "select_sn")
 //    List<SnModel> findByName(@Param("name") String name);
